@@ -1,0 +1,8 @@
+user for default:
+root@root.com
+
+toor
+
+user demo
+ demo@demo.com
+demo
