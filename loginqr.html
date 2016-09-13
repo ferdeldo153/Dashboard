@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="login" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+	<link rel="icon" type="image/png" href="resources/images/icon.png" />
+    <link href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="resources/css/sb-admin-2.css" rel="stylesheet">
+    <link href="resources/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	        <link rel="stylesheet" href="resources/qr/css/reset.css">
+
+        
+		<script src="resources/qr/js/jquery.min.js"></script>
+		<script src="resources/qr/js/photobooth.js"></script>
+
+		<script type="text/javascript" src="resources/qr/js/qr/grid.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/version.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/detector.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/formatinf.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/errorlevel.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/bitmat.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/datablock.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/bmparser.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/datamask.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/rsdecoder.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/gf256poly.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/gf256.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/decoder.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/qrcode.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/findpat.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/alignpat.js"></script>
+		<script type="text/javascript" src="resources/qr/js/qr/databr.js"></script>
+
+		<script type="text/javascript">
+		myqr="";
+$(document).ready(function() {
+
+	// for webcam support
+	$('#example').photobooth().on("image", function(event, dataUrl) {
+		//$("#hiddenImg").html('<img src="' + dataUrl + '" >');
+		qrCodeDecoder(dataUrl);
+		//console.log(event);
+		//console.log(dataUrl);
+		//console.log($('#example').data( "photobooth" ));
+	});
+
+	$('#button').click(function() {
+		$('.trigger').trigger('click');
+	});
+	
+	qrcode.callback = showInfo;
+
+});
+
+// decode the img
+function qrCodeDecoder(dataUrl) {
+	qrcode.decode(dataUrl);
+}
+
+// show info from qr code
+function showInfo(data) {
+	$("#qrContent p").text(data);
+	myqr=data;
+}
+		
+		
+		</script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Iniciar sesión</h3>
+                    </div>
+                    <div class="panel-body">
+                      
+
+				<div id="example"></div>
+			<br>
+			<button id="button" class="btn btn-lg btn-success btn-block" >Escanear</button>
+
+			<br>
+			<div class="boxWrapper auto">
+				<div id="hiddenImg"></div>
+				<div id="qrContent"><p></p></div>
+			</div>
+			<button  onclick="iniciar(myqr);" class="btn btn-success  btn-lg btn-block" >Iniciar</button>
+			<button onclick="location.href='login.html';" class="btn btn-primary  btn-lg btn-block" >Login texto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	    <script type="text/javascript">
+	function iniciar(cadena) {
+location.href='resources/php/sys/iniciarqr.php?qr='+cadena;
+			}
+	</script> 
+    <script src="resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="resources/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="resources/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>
